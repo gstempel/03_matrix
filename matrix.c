@@ -11,18 +11,20 @@ Returns:
 print the matrix
 */
 void print_matrix(struct matrix *m) {
-  char ret[m->rows * m->cols * 2];
   int i, j;
   i = 0;
   j = 0;
+  printf("Number of rows: %d, Number of cols: %d\n", m->rows, m->cols);
   while(i < m->rows) {
     while(j < m->cols) {
-      sprintf(ret + strlen(ret), "%f", m->m[j][i]);
+      //printf("HERE\n");
+      printf("%f ", m->m[i][j]);
       j++;
     }
+    printf("\n");
+    i++;
     j = 0;
   }
-  printf("MATRIX:\n%s", ret);
 }
 
 /*-------------- void ident() --------------

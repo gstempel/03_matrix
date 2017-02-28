@@ -15,6 +15,7 @@ int main() {
   edges = new_matrix(4, 4);
   printf("Matrix 'edges' created\n");
   print_matrix(edges);
+  printf("Matrix 'edges' printed\n");
 
   free_matrix( edges );
 }  
