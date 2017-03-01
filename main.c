@@ -43,10 +43,52 @@ int main() {
   screen s;
   color c;
 
-  c.red = MAX_COLOR;
+  clear_screen(s);
+
+  c.red = 0;
   c.green = MAX_COLOR;
   c.blue = MAX_COLOR;
 
   struct matrix *pic;
   pic = new_matrix(4,4);
+  pic->lastcol = 0;
+  for(i=0;i<4;i++){
+    for(j=0;j<4;j++){
+      pic->m[i][j] = 0.0;
+    }
+  }
+
+  add_edge(pic, 0, 500, 0, 500, 0, 0);
+  add_edge(pic, 500, 500, 0, 0, 0, 0);
+
+  for(i = 50; i < 175; i++) {
+    for(j = 0; j <25; j++) {
+      add_edge(pic, i, j, 0, j, i, 0);
+    }
+  }
+
+  for(i = 50; i < 175; i++) {
+    for(j = 0; j <25; j++) {
+      add_edge(pic, 500-i, j, 0, 500-j, i, 0);
+    }
+  }
+
+  for(i = 50; i < 175; i++) {
+    for(j = 0; j <25; j++) {
+      add_edge(pic, 500-i, 500-j, 0, 500-j, 500-i, 0);
+    }
+  }
+
+  for(i = 50; i < 175; i++) {
+    for(j = 0; j <25; j++) {
+      add_edge(pic, i, 500-j, 0, j, 500-i, 0);
+    }
+  }
+
+
+  draw_lines(pic, s, c);
+
+  display(s);
+  free_matrix(pic);
+
 }  
