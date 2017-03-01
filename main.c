@@ -88,6 +88,7 @@ int main() {
 
   draw_lines(pic, s, c);
 
+  save_extension(s, "image.png");
   display(s);
   free_matrix(pic);
 
