@@ -14,7 +14,7 @@ void print_matrix(struct matrix *m) {
   int i, j;
   i = 0;
   j = 0;
-  printf("Number of rows: %d, Number of cols: %d\n", m->rows, m->cols);
+  //printf("Number of rows: %d, Number of cols: %d\n", m->rows, m->cols);
   while(i < m->rows) {
     while(j < m->cols) {
       //printf("HERE\n");
@@ -33,6 +33,20 @@ Returns:
 turns m in to an identity matrix
 */
 void ident(struct matrix *m) {
+  int i, j;
+  i = 0;
+  j = 0;
+  while(i < m->rows) {
+    while(j < m->cols) {
+      if (i == j)
+	m->m[i][j] = 1;
+      else
+	m->m[i][j] = 0;
+      j++;
+    }
+    i++;
+    j = 0;
+  }
 }
 
 
@@ -43,6 +57,17 @@ Returns:
 multiply each element of m by x
 */
 void scalar_mult(double x, struct matrix *m) {
+  int i, j;
+  i = 0;
+  j = 0;
+  while(i < m->rows) {
+    while(j < m->cols) {
+      m->m[i][j] = (m->m[i][j])*x;
+      j++;
+    }
+    i++;
+    j = 0;
+  }
 }
 
 
@@ -53,6 +78,25 @@ Returns:
 a*b -> b
 */
 void matrix_mult(struct matrix *a, struct matrix *b) {
+  int i, j, k;
+  double tmp = 0.0;
+  i = 0;
+  j = 0;
+  k = 0;
+  while(i < b->rows) {
+    while(j < b->cols) {
+      while(k < a->rows) {
+	tmp += a->m[i][k] * b->m[k][j];
+	k++;
+      }
+      b->m[i][j] = tmp;
+      tmp = 0.0;
+      k = 0;
+      j++;
+    }
+    j = 0;
+    i++;
+  }
 }
 
 
